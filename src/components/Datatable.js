@@ -27,19 +27,21 @@ function BasicExample() {
       <tbody>
         {data?.map((data) => (
           <tr key={data.id}>
-            <td>{data.id}</td>
+            <td className="mw-100">{data.id}</td>
             <td>{data.name}</td>
             <td>{data.price}</td>
-            <td className="d-flex gap-3">
-              <Button variant="success" size="sm">
-                Details
-              </Button>
-              <Button variant="warning" size="sm">
-                Edit
-              </Button>
-              <Button variant="danger" size="sm">
-                Delete
-              </Button>
+            <td>
+              <div className="d-flex gap-3 mh-100">
+                <Button variant="success" size="sm">
+                  Details
+                </Button>
+                <Button variant="warning" size="sm">
+                  Edit
+                </Button>
+                <Button variant="danger" size="sm">
+                  Delete
+                </Button>
+              </div>
             </td>
           </tr>
         ))}
