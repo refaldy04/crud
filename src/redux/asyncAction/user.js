@@ -13,7 +13,7 @@ export const login = createAsyncThunk('auth/login', async (request) => {
     result.id = data.data.name;
     return result;
   } catch (e) {
-    result.errorMsg = e.response.data.message;
+    result.errorMsg = e.response.data.message || 'user not found';
     return result;
   }
 });

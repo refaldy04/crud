@@ -46,7 +46,7 @@ function BasicExample() {
             <td>{data.price}</td>
             <td>
               <div className="d-flex gap-3">
-                <Button variant="success" size="sm" onClick={() => getDetail(data.id)}>
+                <Button variant="info" size="sm" onClick={() => getDetail(data.id)}>
                   Details
                 </Button>
                 <Button variant="warning" size="sm">
