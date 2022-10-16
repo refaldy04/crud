@@ -20,6 +20,7 @@ const schema = yup.object().shape({
 export default function MydModalWithGrid(props) {
   const token = useSelector((state) => state.user.token);
   const errorMsg = useSelector((state) => state.product.errorMsg);
+  const dataProduct = useSelector((state) => state.product.dataProduct);
 
   const dispatch = useDispatch();
   return (
@@ -39,12 +40,12 @@ export default function MydModalWithGrid(props) {
           );
         }}
         initialValues={{
-          product_id: '',
-          name: '',
-          price: '',
+          product_id: dataProduct?.id,
+          name: dataProduct?.name,
+          price: dataProduct?.price,
         }}
       >
-        {({ handleSubmit, handleChange, errors }) => (
+        {({ handleSubmit, handleChange, errors, values }) => (
           <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-vcenter">Using Grid in Modal</Modal.Title>
@@ -52,24 +53,24 @@ export default function MydModalWithGrid(props) {
             <Modal.Body className="show-grid">
               <Container>
                 {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
-                <Row className="mb-3">
+                <Row className="mb-3 visually-hidden">
                   <Form.Group as={Col} md="12" controlId="validationFormik05">
                     <Form.Label>Id Product</Form.Label>
-                    <Form.Control type="text" placeholder="input id" name="product_id" onChange={handleChange} isInvalid={!!errors.product_id} />
+                    <Form.Control type="text" value={values.product_id} name="product_id" onChange={handleChange} isInvalid={!!errors.product_id} />
                     <Form.Control.Feedback type="invalid">{errors.product_id}</Form.Control.Feedback>
                   </Form.Group>
                 </Row>
                 <Row className="mb-3">
                   <Form.Group as={Col} md="12" controlId="validationFormik04">
                     <Form.Label>Name Product</Form.Label>
-                    <Form.Control type="text" placeholder="input name" name="name" onChange={handleChange} isInvalid={!!errors.name} />
+                    <Form.Control type="text" value={values.name} name="name" onChange={handleChange} isInvalid={!!errors.name} />
                     <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
                   </Form.Group>
                 </Row>
                 <Row className="mb-3">
                   <Form.Group as={Col} md="12" controlId="validationFormik05">
                     <Form.Label>Price</Form.Label>
-                    <Form.Control type="price" placeholder="input price" name="price" onChange={handleChange} isInvalid={!!errors.price} />
+                    <Form.Control type="price" value={values.price} name="price" onChange={handleChange} isInvalid={!!errors.price} />
                     <Form.Control.Feedback type="invalid">{errors.price}</Form.Control.Feedback>
                   </Form.Group>
                 </Row>

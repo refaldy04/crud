@@ -11,6 +11,10 @@ function BasicExample() {
   const [show, setShow] = useState(false);
   const [modalShow, setModalShow] = useState(false);
 
+  const token = useSelector((state) => state.user.token);
+  const products = useSelector((state) => state.product.data);
+  const dataProduct = useSelector((state) => state.product.dataProduct);
+
   function handleShow(breakpoint) {
     setFullscreen(breakpoint);
     setShow(true);
@@ -21,10 +25,6 @@ function BasicExample() {
   }
 
   const dispatch = useDispatch();
-
-  const token = useSelector((state) => state.user.token);
-  const data = useSelector((state) => state.product.data);
-  const dataProduct = useSelector((state) => state.product.dataProduct);
 
   useEffect(() => {
     dispatch(getProducts(token));
@@ -40,7 +40,7 @@ function BasicExample() {
         </tr>
       </thead>
       <tbody>
-        {data?.map((data) => (
+        {products?.map((data) => (
           <tr key={data.id}>
             <td className="mw-100">{data.id}</td>
             <td>{data.name}</td>
@@ -56,7 +56,14 @@ function BasicExample() {
                 <Button variant="info" size="sm" onClick={() => getDetail(data.id)}>
                   Details
                 </Button>
-                <Button variant="warning" size="sm" onClick={() => setModalShow(true)}>
+                <Button
+                  variant="warning"
+                  size="sm"
+                  onClick={() => {
+                    dispatch(getProduct({ token, id: data.id }));
+                    setModalShow(true);
+                  }}
+                >
                   Edit
                 </Button>
                 <Button variant="danger" size="sm" onClick={() => dispatch(deleteProduct({ token, id: data.id, cb: () => dispatch(getProducts(token)) }))}>

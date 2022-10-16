@@ -18,7 +18,7 @@ export const getProduct = createAsyncThunk('product/getDataById', async (request
   const result = {};
   try {
     const { data } = await http(request.token).get('/product/show?product_id=' + request.id);
-    request.cb();
+    request.cb && request.cb();
     result.data = data.data;
     return result;
   } catch (e) {
