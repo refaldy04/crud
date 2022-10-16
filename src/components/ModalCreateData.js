@@ -44,7 +44,7 @@ export default function MydModalWithGrid(props) {
         {({ handleSubmit, handleChange, errors }) => (
           <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-vcenter">Using Grid in Modal</Modal.Title>
+              <Modal.Title id="contained-modal-title-vcenter">Create Data Product</Modal.Title>
             </Modal.Header>
             <Modal.Body className="show-grid">
               <Container>
