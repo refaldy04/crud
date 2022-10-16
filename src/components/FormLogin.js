@@ -2,11 +2,13 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Alert from 'react-bootstrap/Alert';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/asyncAction/user';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const schema = yup.object().shape({
   email: yup.string().required(),
@@ -14,6 +16,7 @@ const schema = yup.object().shape({
 });
 
 export default function FormExample() {
+  const errorMsg = useSelector((state) => state.user.errorMsg);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -29,6 +32,7 @@ export default function FormExample() {
     >
       {({ handleSubmit, handleChange, errors }) => (
         <Form onSubmit={handleSubmit} className="py-5 w-100">
+          {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
           <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationFormik04">
               <Form.Label>Email</Form.Label>
