@@ -40,3 +40,17 @@ export const createProduct = createAsyncThunk('product/createProduct', async (re
     return result;
   }
 });
+
+export const editProduct = createAsyncThunk('product/createProduct', async (request) => {
+  const result = {};
+  try {
+    const send = qs.stringify(request.data);
+    const { data } = await http(request.token).post('/product/update', send);
+    request.cb();
+    result.data = data.data;
+    return result;
+  } catch (e) {
+    result.errorMsg = e.response.data.message;
+    return result;
+  }
+});

@@ -4,11 +4,12 @@ import Modal from 'react-bootstrap/Modal';
 import { useEffect, useState } from 'react';
 import { getProducts, getProduct } from '../redux/asyncAction/products';
 import { useDispatch, useSelector } from 'react-redux';
+import ModalEditData from '../components/ModalEditData';
 
 function BasicExample() {
-  const value = true;
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   function handleShow(breakpoint) {
     setFullscreen(breakpoint);
@@ -16,7 +17,7 @@ function BasicExample() {
   }
 
   function getDetail(id) {
-    dispatch(getProduct({ token, id, cb: () => handleShow(value) }));
+    dispatch(getProduct({ token, id, cb: () => handleShow(true) }));
   }
 
   const dispatch = useDispatch();
@@ -43,13 +44,19 @@ function BasicExample() {
           <tr key={data.id}>
             <td className="mw-100">{data.id}</td>
             <td>{data.name}</td>
-            <td>{data.price}</td>
+            <td>
+              {parseInt(data.price).toLocaleString('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+              })}
+            </td>
             <td>
               <div className="d-flex gap-3">
+                <ModalEditData show={modalShow} onHide={() => setModalShow(false)} />
                 <Button variant="info" size="sm" onClick={() => getDetail(data.id)}>
                   Details
                 </Button>
-                <Button variant="warning" size="sm">
+                <Button variant="warning" size="sm" onClick={() => setModalShow(true)}>
                   Edit
                 </Button>
                 <Button variant="danger" size="sm">

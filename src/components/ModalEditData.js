@@ -5,18 +5,21 @@ import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProduct, getProducts } from '../redux/asyncAction/products';
+import { editProduct, getProducts } from '../redux/asyncAction/products';
 
 const schema = yup.object().shape({
+  product_id: yup.number().required(),
   name: yup.string().required(),
   price: yup.number().required(),
 });
 
 export default function MydModalWithGrid(props) {
   const token = useSelector((state) => state.user.token);
+  const errorMsg = useSelector((state) => state.product.errorMsg);
 
   const dispatch = useDispatch();
   return (
@@ -24,9 +27,8 @@ export default function MydModalWithGrid(props) {
       <Formik
         validationSchema={schema}
         onSubmit={(e) => {
-          console.log(e);
           dispatch(
-            createProduct({
+            editProduct({
               data: e,
               token,
               cb: () => {
@@ -37,6 +39,7 @@ export default function MydModalWithGrid(props) {
           );
         }}
         initialValues={{
+          product_id: '',
           name: '',
           price: '',
         }}
@@ -48,6 +51,14 @@ export default function MydModalWithGrid(props) {
             </Modal.Header>
             <Modal.Body className="show-grid">
               <Container>
+                {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
+                <Row className="mb-3">
+                  <Form.Group as={Col} md="12" controlId="validationFormik05">
+                    <Form.Label>Id Product</Form.Label>
+                    <Form.Control type="text" placeholder="input id" name="product_id" onChange={handleChange} isInvalid={!!errors.product_id} />
+                    <Form.Control.Feedback type="invalid">{errors.product_id}</Form.Control.Feedback>
+                  </Form.Group>
+                </Row>
                 <Row className="mb-3">
                   <Form.Group as={Col} md="12" controlId="validationFormik04">
                     <Form.Label>Name Product</Form.Label>
