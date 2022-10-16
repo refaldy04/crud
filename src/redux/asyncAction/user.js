@@ -21,8 +21,7 @@ export const login = createAsyncThunk('auth/login', async (request) => {
 export const logout = createAsyncThunk('auth/logout', async (request) => {
   const result = {};
   try {
-    const send = qs.stringify(request);
-    await http().post('/logout', send);
+    await http(request).post('/logout');
   } catch (e) {
     result.errorMsg = e.response.data.message;
     return result;

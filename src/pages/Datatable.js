@@ -22,7 +22,7 @@ const Datatable = () => {
           <h1 className="text-light">Data Product</h1>
         </Col>
         <Col md="6" className="d-flex justify-content-md-end mb-3 mb-md-0 align-items-center ">
-          <Button variant="dark" onClick={onLogout}>
+          <Button variant="dark" onClick={onLogout} className="fw-bold">
             Logout
           </Button>
         </Col>
