@@ -11,8 +11,6 @@ const products = createSlice({
   reducers: {},
   extraReducers: (build) => {
     build.addCase(getProducts.fulfilled, (state, action) => {
-      console.log('ini dari redicers product', action.payload);
-
       state.data = action.payload.data;
     });
   },

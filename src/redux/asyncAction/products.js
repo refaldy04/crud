@@ -8,7 +8,6 @@ export const getProducts = createAsyncThunk('product/getData', async (request) =
     const send = qs.stringify(request);
     console.log(send);
     const { data } = await http(request).get('/product');
-    console.log('ini data dari backend waktu login', data);
     result.data = data.data;
     return result;
   } catch (e) {

@@ -4,7 +4,7 @@ import Table from '../components/Datatable';
 
 const Datatable = () => {
   return (
-    <Container className="bg-primary p-5" fluid>
+    <Container className="bg-primary py-4 p-md-5" fluid>
       <Row>
         <Col xs="12" className="min-vh-100">
           <h1 className="text-light mb-5">Data Product</h1>

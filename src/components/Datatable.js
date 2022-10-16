@@ -1,4 +1,5 @@
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import { useEffect } from 'react';
 import { getProducts } from '../redux/asyncAction/products';
 import { useDispatch } from 'react-redux';
@@ -11,7 +12,6 @@ function BasicExample() {
   const data = useSelector((state) => state.product.data);
 
   useEffect(() => {
-    console.log(data);
     dispatch(getProducts(token));
   }, []);
   return (
@@ -25,12 +25,22 @@ function BasicExample() {
         </tr>
       </thead>
       <tbody>
-        {data.map((data) => (
+        {data?.map((data) => (
           <tr key={data.id}>
             <td>{data.id}</td>
             <td>{data.name}</td>
             <td>{data.price}</td>
-            <td>@mdo</td>
+            <td className="d-flex gap-3">
+              <Button variant="success" size="sm">
+                Details
+              </Button>
+              <Button variant="warning" size="sm">
+                Edit
+              </Button>
+              <Button variant="danger" size="sm">
+                Delete
+              </Button>
+            </td>
           </tr>
         ))}
       </tbody>

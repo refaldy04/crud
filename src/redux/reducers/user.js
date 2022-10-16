@@ -20,7 +20,6 @@ const user = createSlice({
       state.successMsg = null;
     });
     build.addCase(login.fulfilled, (state, action) => {
-      console.log('ini dari redicers user', action.payload);
       const token = action.payload?.token;
       const email = action.payload?.email;
       const name = action.payload?.name;

@@ -7,8 +7,6 @@ export const login = createAsyncThunk('auth/login', async (request) => {
   try {
     const send = qs.stringify(request);
     const { data } = await http().post('/login', send);
-    console.log('ini data dari backend waktu login', data);
-
     result.token = data.data.token;
     result.email = data.data.email;
     result.name = data.data.name;
