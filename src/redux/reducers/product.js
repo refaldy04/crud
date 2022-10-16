@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getProducts } from '../asyncAction/products';
+import { getProducts, getProduct } from '../asyncAction/products';
 
 const initialState = {
   data: null,
+  dataProduct: null,
 };
 
 const products = createSlice({
@@ -12,6 +13,10 @@ const products = createSlice({
   extraReducers: (build) => {
     build.addCase(getProducts.fulfilled, (state, action) => {
       state.data = action.payload.data;
+    });
+
+    build.addCase(getProduct.fulfilled, (state, action) => {
+      state.dataProduct = action.payload.data;
     });
   },
 });
