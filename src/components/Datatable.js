@@ -2,8 +2,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useEffect } from 'react';
 import { getProducts } from '../redux/asyncAction/products';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function BasicExample() {
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ function BasicExample() {
             <td>{data.name}</td>
             <td>{data.price}</td>
             <td>
-              <div className="d-flex gap-3 mh-100">
+              <div className="d-flex gap-3">
                 <Button variant="success" size="sm">
                   Details
                 </Button>

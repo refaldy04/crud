@@ -8,10 +8,11 @@ import product from './product';
 const authConfig = {
   storage,
   key: 'auth',
+  whitelist: ['token'],
 };
 
 const reducer = combineReducers({
-  user: auth,
+  user: persistReducer(authConfig, auth),
   product,
 });
 

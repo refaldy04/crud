@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { login } from '../asyncAction/user';
+import { login, logout } from '../asyncAction/user';
 
 const initialState = {
   token: null,
@@ -19,6 +19,7 @@ const user = createSlice({
       state.errorMsg = null;
       state.successMsg = null;
     });
+
     build.addCase(login.fulfilled, (state, action) => {
       const token = action.payload?.token;
       const email = action.payload?.email;
@@ -33,6 +34,10 @@ const user = createSlice({
         state.errorMsg = action.payload?.errorMsg;
         state.successMsg = action.payload?.successMsg;
       }
+    });
+
+    build.addCase(logout.fulfilled, (state, action) => {
+      return initialState;
     });
   },
 });
