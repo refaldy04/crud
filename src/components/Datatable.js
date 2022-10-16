@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useEffect, useState } from 'react';
-import { getProducts, getProduct } from '../redux/asyncAction/products';
+import { getProducts, getProduct, deleteProduct } from '../redux/asyncAction/products';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalEditData from '../components/ModalEditData';
 
@@ -59,7 +59,7 @@ function BasicExample() {
                 <Button variant="warning" size="sm" onClick={() => setModalShow(true)}>
                   Edit
                 </Button>
-                <Button variant="danger" size="sm">
+                <Button variant="danger" size="sm" onClick={() => dispatch(deleteProduct({ token, id: data.id, cb: () => dispatch(getProducts(token)) }))}>
                   Delete
                 </Button>
               </div>

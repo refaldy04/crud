@@ -28,9 +28,11 @@ const Datatable = () => {
         </Col>
         <Col xs="12" className="mt-4 mb-2">
           <ModalCreateData show={modalShow} onHide={() => setModalShow(false)} />
-          <Button variant="success" onClick={() => setModalShow(true)}>
-            Create Data Product
-          </Button>
+          <div className="d-grid">
+            <Button variant="success" onClick={() => setModalShow(true)} className="fw-bold">
+              Create Data Product
+            </Button>
+          </div>
         </Col>
       </Row>
       <Row>

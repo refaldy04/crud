@@ -54,3 +54,14 @@ export const editProduct = createAsyncThunk('product/createProduct', async (requ
     return result;
   }
 });
+
+export const deleteProduct = createAsyncThunk('product/deleteProduct', async (request) => {
+  const result = {};
+  try {
+    await http(request.token).delete('/product/' + request.id);
+    request.cb();
+  } catch (e) {
+    result.errorMsg = e.response.data.message;
+    return result;
+  }
+});
