@@ -7,7 +7,6 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/asyncAction/user';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const schema = yup.object().shape({
@@ -18,12 +17,12 @@ const schema = yup.object().shape({
 export default function FormExample() {
   const errorMsg = useSelector((state) => state.user.errorMsg);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   return (
     <Formik
       validationSchema={schema}
       onSubmit={(e) => {
-        dispatch(login({ data: e, cb: () => navigate('./datatable') }));
+        console.log(e);
+        dispatch(login(e));
       }}
       initialValues={{
         email: '',

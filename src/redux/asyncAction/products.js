@@ -2,17 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import qs from 'qs';
 import http from '../../helpers/http';
 
-export const login = createAsyncThunk('auth/login', async (request) => {
+export const getProducts = createAsyncThunk('product/getData', async (request) => {
   const result = {};
   try {
     const send = qs.stringify(request);
-    const { data } = await http().post('/login', send);
+    console.log(send);
+    const { data } = await http(request).get('/product');
     console.log('ini data dari backend waktu login', data);
-
-    result.token = data.data.token;
-    result.email = data.data.email;
-    result.name = data.data.name;
-    result.id = data.data.name;
+    result.data = data.data;
     return result;
   } catch (e) {
     result.errorMsg = e.response.data.message;
