@@ -20,8 +20,8 @@ function BasicExample() {
     setShow(true);
   }
 
-  function getDetail(id) {
-    dispatch(getProduct({ token, id, cb: () => handleShow(true) }));
+  function getDetail(id, cb) {
+    dispatch(getProduct({ token, id, cb }));
   }
 
   const dispatch = useDispatch();
@@ -53,15 +53,14 @@ function BasicExample() {
             <td>
               <div className="d-flex gap-3">
                 <ModalEditData show={modalShow} onHide={() => setModalShow(false)} />
-                <Button variant="info" size="sm" onClick={() => getDetail(data.id)}>
+                <Button variant="info" size="sm" onClick={() => getDetail(data.id, () => handleShow(true))}>
                   Details
                 </Button>
                 <Button
                   variant="warning"
                   size="sm"
                   onClick={() => {
-                    dispatch(getProduct({ token, id: data.id }));
-                    setModalShow(true);
+                    getDetail(data.id, () => setModalShow(true));
                   }}
                 >
                   Edit
