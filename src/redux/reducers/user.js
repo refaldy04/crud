@@ -20,6 +20,11 @@ const user = createSlice({
       state.successMsg = null;
     });
 
+    build.addCase(login.rejected, (state) => {
+      state.errorMsg = 'email or password invalid';
+      state.successMsg = null;
+    });
+
     build.addCase(login.fulfilled, (state, action) => {
       const token = action.payload?.token;
       const email = action.payload?.email;
