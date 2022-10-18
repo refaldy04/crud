@@ -24,7 +24,6 @@ export default function MydModalWithGrid(props) {
       <Formik
         validationSchema={schema}
         onSubmit={(e) => {
-          console.log(e);
           dispatch(
             createProduct({
               data: e,
