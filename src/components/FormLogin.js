@@ -20,9 +20,8 @@ export default function FormExample() {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={(e) => {
-        console.log(e);
-        dispatch(login(e));
+      onSubmit={(val) => {
+        dispatch(login(val));
       }}
       initialValues={{
         email: '',
