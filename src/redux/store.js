@@ -5,9 +5,16 @@ import { persistStore } from 'redux-persist';
 
 import reducer from './reducers';
 
+let middleware = [];
+if (process.env.REACT_APP_NODE_ENV === 'development') {
+  middleware = [thunk, logger];
+} else {
+  middleware = [thunk];
+}
+
 export const store = configureStore({
   reducer,
-  middleware: [thunk, logger],
+  middleware,
 });
 
 export const persistor = persistStore(store);
