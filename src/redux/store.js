@@ -6,7 +6,7 @@ import { persistStore } from 'redux-persist';
 import reducer from './reducers';
 
 let middleware = [];
-if (process.env.REACT_APP_NODE_ENV === 'development') {
+if (process.env.REACT_APP_NODE_ENV) {
   middleware = [thunk, logger];
 } else {
   middleware = [thunk];
